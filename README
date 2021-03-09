@@ -1,0 +1,48 @@
+// Cosor Mihai, 312CA
+
+//  Pentru realizarea acestei teme am incercat o abordare cat mai simpla, care
+	consta in utilizarea unei structuri pentru stocarea informatiilor in cazul
+	imaginilor noncolore (image_format), impreuna cu o structura suplimentara
+	pentru imaginile colore (colors). De asemena, am mai folosit o structura
+	pentru coordonatele necesare selectiei si viitoarelor comenzi.
+
+//  Codul este organizat in mai multe surse si un header in care sunt definite
+	structurile si unde sunt trecute si semnaturile functiilor. Mai jos descriu
+	pe scurt ce contine fiecare sursa si cum au fost gandite functiile aferente
+
+//  main.c: contine functia main, in care am folosit un while pentru a citi
+	linie cu linie inputul. Dupa fiecare linie citia, daca aceasta nu
+	corespunde comenzii "EXIT", este apelata o functie pentru identificarea
+	comenzii.
+
+//  files_usage.c: contine functiile necesare comenzilor "LOAD" si "SAVE".
+	Cele de "load" incep prin a deschide in mod text fisierul primit ca input,
+	pentru a verifica tipul imaginii cu ajutorul primelor 2 caractere din
+	fisier. Apoi fisierul este inchis si deschis din nou in modul corespunzator
+	pentru a citite in structurile potrivite informatiile  imaginii ce urmeaza
+	a fi procesata. Este implementata in plus o functie ce verifica existenta
+	comentariilor in fisier si le ignora pana cand ajunge sa citeasca matricea.
+	Cele de "save" functioneaza similar, se verifica existenta
+	optiunii "ascii", pentru a deschide/crea apoi fisierul in modul potrivit.
+	Tot ce ramane este scrierea informatiilor stocate in fisier.
+
+//  operations.c: contine functiile ce se ocupa de executia propriu-zisa a
+	comenzilor introduse de utilizator. In primul rand, se face identificarea
+	comenzii introduse ("operation_check"), urmand apelarea altor functii.
+	Pentru "SELECT" se verifica existenta si validitatea parametrilor inainte
+	de a seta coordonatele selectiei. "GRAYSCALE" si "SEPIA" modifica fiecare
+	pixel din matrice (matrici pentru colore) conform formulelor din enunt,
+	avand grija sa nu depaseasca valoarea maxima admisa, si sa fie aproximati
+	la cel mai apropiat intreg dupa fiecare filtru aplicat. Ultimele doua
+	operatii, "CROP" si "ROTATE" folosesc cate o matrice (trei pentru colore)
+	drept copie in care pentru decupare se stocheaza selectia propriu-zisa,
+	iar pentru rotire se stocheaza selectia rotita la 90 de grade spre dreapta.
+	Pentru alte unghiuri valide, se va apela de mai multe ori aceasta functie.
+	La finalul ambelor operatii (la rotire doar daca exista parametrul "ALL")
+	se seteaza noile dimensiuni ale imaginii si se selecteaza aceasta.
+
+//  alloc_free_resources.c: contine functiile pentru alocarea memoriei
+	matricilor din structurile folosite, plus cele pentru dealocarea acestora
+	si a eventualelor copii facute pentru "CROP"/"ROTATE". Functiile de alocare
+	dinamica contin si "programare defensiva" prin verificarea alocarii, si
+	oprirea programului cu un mesaj de eroare in cazul in care aceasta a esuat.
