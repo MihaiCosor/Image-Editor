@@ -1,4 +1,4 @@
-// Cosor Mihai, 312CA
+// Cosor Mihai
 
 #include <stdio.h>
 #include <stdlib.h>
