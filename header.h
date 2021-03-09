@@ -1,4 +1,4 @@
-// Cosor Mihai, 312CA
+// Cosor Mihai
 
 #pragma once
 
