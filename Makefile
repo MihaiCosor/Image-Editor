@@ -1,7 +1,7 @@
-build: tema
+build: ex
 
-tema: main.c operations.c alloc_free_resources.c files_usage.c
+ex: main.c operations.c alloc_free_resources.c files_usage.c
 	gcc -Wall -Wextra main.c operations.c alloc_free_resources.c files_usage.c -o image_editor -lm
 	
 clean:
-	rm -f tema
+	rm -f ex
